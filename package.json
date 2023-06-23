@@ -1,0 +1,23 @@
+{
+  "name": "playwright-framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^9.1.2",
+    "@playwright/test": "^1.35.1",
+    "allure-playwright": "^2.4.0",
+    "dotenv": "^16.3.0",
+    "exceljs": "^4.3.0",
+    "fs": "^0.0.1-security",
+    "tsconfig-paths": "^4.2.0",
+    "uuid": "^9.0.0"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
