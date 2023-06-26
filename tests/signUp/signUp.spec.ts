@@ -3,7 +3,7 @@ import LoginPage from 'support/pages/login/loginPage';
 import uuidUtils from 'support/utils/uuidUtils';
 
 
-test('has title', async ({page}) => {
+test('signup test ', async ({page}) => {
 
     let name:string ="sandy"
     let email:string= uuidUtils.getRandomEmail()

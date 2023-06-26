@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "clean-reports" : "rm -rf allure-reports && rm -rf allure-results",
+    "allure-generate":"allure generate ./allure-results --clean",
+    "allure-open" : "allure open ./allure-report",
+    "run-tests-allure": "npx playwright test -g @smoke --reporter=allure-playwright", 
+    "test": "npm run clean-reports && npm run run-tests-allure && npm run allure-generate && npm run allure-open"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

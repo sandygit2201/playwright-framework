@@ -1,43 +1,38 @@
-import productBasePage from "./productsBasepage";
-import { Page } from "@playwright/test";
+import { Page,expect } from "@playwright/test"
+import BasePage from "../basePage"
 
+export default class ProductDetailsPage extends BasePage{
 
-class ProductDetailsPage extends productBasePage{
-
-    private productDetailsPage:Page
+    productDetailsPage:Page
     constructor(page:Page){
         super(page)
-        this.productDetailsPage = page;
+        this.productDetailsPage = page
     }
 
-    async submitReview(reviewDetails:any){
+    async addProductToCart(productInfo:any){
 
-        this.fillReviewForm(reviewDetails)
+        if(productInfo.hasOwnProperty('qty')){
+            await this.productDetailsPage.locator('#quantity').clear()
+            await this.productDetailsPage.locator('#quantity').fill(productInfo.qty)
+        }
 
+        this.productDetailsPage.on('dialog',async (dialog)=>{
+            console.log("Message::" + dialog.message())
+        })
+
+        await this.productDetailsPage.locator("button[class='btn btn-default cart']").click()
+        await this.productDetailsPage.getByRole('button', { name: 'Continue Shopping' }).click();
+    
     }
 
-   async fillReviewForm(reviewDetails:any){
 
-        if(reviewDetails.hasOwnProperty('name')){
-            await page.locacator('#name').clear()
-            await page.locacator('#name').fill(reviewDetails.name)
-            
-        }
-        if(reviewDetails.haskey('email')){
-            await page.locacator('#email').clear()
-            await page.locacator('#email').fill(reviewDetails.name)
-        }
-
-        if(reviewDetails.haskey('review')){
-            await page.locacator('#review').clear()
-            await page.locacator('#review').fill(reviewDetails.name)
-        }
-
-
-
-
+    async verifyProductDetails(productInof:any){
+     
     }
+
+    async verifyProductTitle(productTitle:string){
+    expect(this.productDetailsPage.locator("//h2[text()='Frozen Tops For Kids']")).toBeVisible
+    }
+
 
 }
-
-export default new ProductDetailsPage()

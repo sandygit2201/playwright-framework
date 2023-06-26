@@ -46,7 +46,7 @@ export default class BasePage {
     }
 
     async navigateToCart(){
-        await this.basePage.locator('a[href="/view_cart"]').click()
+        await this.basePage.locator('a[href="/view_cart"]').first().click()
         expect(this.basePage.url()).toContain('view_cart')
     }
 

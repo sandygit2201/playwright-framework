@@ -14,15 +14,14 @@ export default class ContactUsPage extends BasePage {
 
         await expect(this.contactUsPage.locator("//h2[contains(text(),'Get In Touch')]")).toBeVisible()
         await this.fillContactUsForm(formInfo)
+        this.contactUsPage.on('dialog', async (dialog) => {
+            expect(dialog.message()).toEqual('Press OK to proceed!')
+            await dialog.accept()
+          })
+        await this.contactUsPage.pause()
         await this.clickOnSubmit()
-        // handle ok on alert 
-        await expect(this.contactUsPage.locator("//div[text()='Success! Your details have been submitted successfully.']"))
+        await expect(this.contactUsPage.locator("text=Success! Your details have been submitted successfully.").first())
             .toBeVisible()
-
-    }
-
-    async submitForm2(){
-
     }
 
     async fillContactUsForm(formInfo: any) {
@@ -48,10 +47,7 @@ export default class ContactUsPage extends BasePage {
         }
 
         if (formInfo.hasOwnProperty('file')) {
-            //method to upload file
+            await this.contactUsPage.locator('[name="upload_file"]').setInputFiles(formInfo.file)
         }
-
-
     }
-
 }
