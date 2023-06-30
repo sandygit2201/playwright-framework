@@ -43,6 +43,7 @@ test('End to End order @smoke @regression @order ', async ({ page }) => {
     await productDetailsPage.addProductToCart(productInfo)
     await basePage.navigateToCart()
     await cartPage.proceedToCheckout()
+    await cartPage.verifyDeliveryAddress()
     
     await checkoutPage.placeOrder()
     await paymentPage.fillCardDetailsAndCompleteOrder(cardInfo)
